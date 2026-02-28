@@ -100,7 +100,7 @@ func DefaultConfig() *Config {
 func DefaultModel(provider string) string {
 	switch strings.ToLower(provider) {
 	case "anthropic":
-		return "claude-sonnet-4-5"
+		return "claude-sonnet-4-5-20250929"
 	case "openai":
 		return "gpt-4o"
 	case "gemini":

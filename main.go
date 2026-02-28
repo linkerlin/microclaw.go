@@ -10,6 +10,7 @@ import (
 	"strings"
 
 	"github.com/spf13/cobra"
+	"golang.org/x/crypto/bcrypt"
 
 	"github.com/linkerlin/microclaw.go/internal/config"
 	"github.com/linkerlin/microclaw.go/internal/runtime"
@@ -170,8 +171,12 @@ var webPasswordCmd = &cobra.Command{
 			return fmt.Errorf("initializing runtime: %w", err)
 		}
 
-		// Store as plain text hash (simple implementation).
-		if err := rt.DB().SetWebPassword(args[0]); err != nil {
+		// Hash the password with bcrypt before storing.
+		hash, err := bcrypt.GenerateFromPassword([]byte(args[0]), bcrypt.DefaultCost)
+		if err != nil {
+			return fmt.Errorf("hashing password: %w", err)
+		}
+		if err := rt.DB().SetWebPassword(string(hash)); err != nil {
 			return fmt.Errorf("setting password: %w", err)
 		}
 

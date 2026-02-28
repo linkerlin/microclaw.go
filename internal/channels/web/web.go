@@ -3,7 +3,6 @@ package web
 
 import (
 	"context"
-	"crypto/subtle"
 	"encoding/json"
 	"fmt"
 	"log"
@@ -13,6 +12,7 @@ import (
 	"time"
 
 	"github.com/gorilla/websocket"
+	"golang.org/x/crypto/bcrypt"
 
 	"github.com/linkerlin/microclaw.go/internal/agent"
 	"github.com/linkerlin/microclaw.go/internal/config"
@@ -190,9 +190,10 @@ func (c *Channel) serveClear(w http.ResponseWriter, r *http.Request) {
 	w.WriteHeader(http.StatusOK)
 }
 
-// checkPassword validates the password with constant-time comparison.
+// checkPassword validates a plaintext password against a bcrypt hash.
 func checkPassword(hash, input string) bool {
-	return subtle.ConstantTimeCompare([]byte(hash), []byte(input)) == 1
+	err := bcrypt.CompareHashAndPassword([]byte(hash), []byte(input))
+	return err == nil
 }
 
 func hashString(s string) uint64 {

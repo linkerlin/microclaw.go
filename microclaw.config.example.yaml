@@ -1,7 +1,7 @@
 llm_provider: "anthropic"  # anthropic, openai, openai-compatible, gemini, ollama, openrouter, deepseek
 api_key: ""
 base_url: ""  # override API base URL (for openai-compatible providers)
-model: ""     # default per provider (e.g., claude-sonnet-4-5 for anthropic)
+model: ""     # default per provider (e.g., claude-sonnet-4-5-20250929 for anthropic)
 max_tokens: 8192
 max_tool_iterations: 100
 max_history_messages: 50
