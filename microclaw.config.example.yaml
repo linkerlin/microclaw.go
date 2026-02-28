@@ -1,0 +1,36 @@
+llm_provider: "anthropic"  # anthropic, openai, openai-compatible, gemini, ollama, openrouter, deepseek
+api_key: ""
+base_url: ""  # override API base URL (for openai-compatible providers)
+model: ""     # default per provider (e.g., claude-sonnet-4-5-20250929 for anthropic)
+max_tokens: 8192
+max_tool_iterations: 100
+max_history_messages: 50
+max_document_size_mb: 100
+memory_token_budget: 1500
+data_dir: "~/.microclaw"
+working_dir: "~/.microclaw/working_dir"
+working_dir_isolation: "chat"  # chat | shared
+high_risk_tool_user_confirmation_required: true
+timezone: "UTC"
+max_session_messages: 40
+compact_keep_recent: 20
+channels:
+  web:
+    enabled: true
+  telegram:
+    enabled: false
+    bot_token: ""
+    bot_username: ""
+    allowed_groups: []
+    allowed_user_ids: []
+  discord:
+    enabled: false
+    bot_token: ""
+    allowed_channels: []
+  slack:
+    enabled: false
+    bot_token: ""
+    app_token: ""
+web_host: "127.0.0.1"
+web_port: 10961
+soul_path: null
